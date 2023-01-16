@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace App_lab
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            /*
+             Ex1 
+             sa se impl o aplc de tip consola care va indepli urm cerinte
+                a) se construieste o lista cu elemente preluate dintr un fisier
+                fiecare linie a fisierului repr un element al listei cu conditia ca numarul de caractere sa fie mai mare ca 5
+                b)sa se afiseze nr elementelor din lista creata la punctul a
+                c)sa se afiseze lista sortata descrescator
+                d)sa se stearga din lista elementele care incep cu caracterul "a"
+                e)sa se extraga ultimele 4 elemente din lista iar daca lista are mai putin de 4 elemente atunci se va afisa un mesaj de atentionare */
+
+            //a
+            List<string> fisier = File.ReadAllLines(@"C:\Users\user\Desktop\facultate\f1.txt").Where(c => c.Length > 5).ToList();
+
+            Console.WriteLine(String.Join("\n", fisier));
+            //b
+            Console.WriteLine("Numarul de elemente din lista este: " + fisier.Count);
+
+            //c            
+                Console.WriteLine(String.Join(", ", fisier.OrderByDescending(c => c)));
+            //d
+
+            fisier = fisier.Where(c => !c.StartsWith("a")).ToList();
+            Console.WriteLine(String.Join(", ", fisier));
+
+            //e
+            if(fisier.Count > 4)
+            {
+                fisier = fisier.Skip(fisier.Count() - 4).Take(4).ToList();
+                Console.WriteLine(String.Join(", ", fisier));
+            }
+            else
+            {
+                Console.WriteLine("Lista nu mai mult de 4 elemente in lista.");
+            }
+
+        }
+    }
+}

@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Security.Cryptography;
+
+namespace aplicatia3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Persoana> p1 = new List<Persoana>();
+            Console.WriteLine("Introduceti numarul de elemente :");
+            var numarulDeElemente = int.Parse(Console.ReadLine());
+            for (int i = 0; i < numarulDeElemente; i++)
+            {
+                Persoana pers = new Persoana();
+                Console.WriteLine("Introduceti id-ul persoanei:");
+
+                string nr= Console.ReadLine();
+                var x=int.Parse(nr);
+                pers.id = x;
+
+                Console.WriteLine("Introduceti numele persoanei:");
+                pers.nume = Console.ReadLine();
+
+                p1.Add(pers);
+            }
+
+            foreach(var pers in p1)
+            {
+                Console.WriteLine("ID:" + pers.id + "\nNUME:" + pers.nume);
+            }
+
+            Console.WriteLine("Introduceti numele pe care doriti sa il eliminati:");
+            string a = Console.ReadLine();
+            p1.Remove(p1.Single(c => c.nume == (a)));
+
+            foreach (var pers in p1)
+            {
+                Console.WriteLine("ID:" + pers.id + "\nNUME:" + pers.nume);
+            }
+
+            Console.WriteLine("Introduceti id-ul cautat:");
+            string o = Console.ReadLine();
+            var p = int.Parse(o);
+
+            Console.WriteLine("Introduceti numele cautat:");
+            string b = Console.ReadLine();
+            foreach (var pers in p1)
+            {
+                if (pers.id == p && pers.nume == b)
+                {
+                    Console.WriteLine("Persoana gasita in baza de date!");
+                }
+                else Console.WriteLine("Persoana inexistenta!");
+            }
+        }
+    }
+}

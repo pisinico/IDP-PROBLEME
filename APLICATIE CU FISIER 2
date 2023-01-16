@@ -1,0 +1,40 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.IO;
+
+namespace ConsoleApp4
+{
+   /* Să se implementeze o aplicație de tip consolă în C#, care va îndeplini următoarele cerințe:
+    a.Să se citească dintr-un fișier toate liniile text, iar fiecare linie va reprezenta un element
+    dintr-o listă;
+    b.Să se numere câte elemente din listă încep cu litera ‘A’ sau ‘a’;
+    c.Să se filtreze elementele a căror lungime(număr de caractere) depăsește valoarea 4;
+    d.Să se sorteze descrescător elementele care conțin un spațiu alb din listă;
+    e.Să se excludă primele 2 elemente din listă la afișare;
+    f.Să se preia ultimele 2 elemente din listă și să se afișeze elementele rămase*/
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> fisier = File.ReadAllLines(@"C:\Users\user\Desktop\facultate\f1.txt").ToList();
+
+            //b
+            Console.WriteLine("Elemetele care incep cu A sau a:" + fisier.Where(c => c.Contains("a") || c.Contains("A")).Count());
+
+            //c
+            Console.WriteLine("elementele al caror lungime dep. 4 :" + fisier.Where( c => c.Length > 4).Count());
+            //d
+            Console.WriteLine("sortarea elemetelor care contine spatiu alb :" + fisier.Where(c => c.Contains(" ")).OrderByDescending(c => c));
+            //e
+            Console.WriteLine("Primele 2 elemente excluse :" + fisier.Skip(2));
+            //f
+            //Console.WriteLine("Elementele ramase dupa ce prelom utim 2 :" + fisier.)
+        }
+    }
+}

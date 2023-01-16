@@ -1,57 +1,66 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aplicatie_cu_clasa_student_2
+namespace Aplicatie__2_model_examen
 {
-    /*Sa se creeze un proiect de tip consolã.Sã se implementeze urmãtoarele cerinte:
-    a.Sã se adauge in Solution Explorer o clasã numita Student caracterizata de proprietatea: id (int) si prenume (string);
-
-    b.Sa se creeze in programul principal o list cu elemente de tip Student si sã se afiseze elementele din aceasta list.
-    Valorile corespunzatoare prenumelui vor fi citite dintr-un fisier text, iar id-ul reprezintà pozitia prenumelui din fisier.
-    Afisarea datelor se va face din list, iar in caz contrar, nu se va puncta cerinta;
-    
-    c.Sa se adauge în fisier prenumele unui nou student.Valoarea prenumelui se citeste de la tastatura;
-    d.Sa se modifice prenumele unui student din fisier.Noua valoarea va fi cititã de la tastaturã Studentul pentru care se realizeazã modificarea este identificat prin intermediul id-ului, citit de la tastatura.*/
     internal class Program
     {
+
+       /* Să se creeze un proiect de tip consolă.Să se implementeze următoarele cerințe:
+        a.Să se adauge în Solution Explorer o clasă numită Verificare cu următoarele proprietăți: 
+        nota (int), prenume (string), nume (string);
+        b.Să se creeze în programul principal o listă cu elemente de tip Verificare și să se afișeze
+        elementele din această listă.Atât numărul elementelor, cât și valorile, vor fi citite de la
+        tastatură.Afișarea datelor se va face din listă, iar în caz contrar, nu se va puncta cerința;
+        c.Să se verifice încercarea de a introduce litere pentru note și să se afișeze un mesaj de
+        atenționare;
+        d.Să se numere câți studenți au note cuprinse între 7 și 9.*/
         static void Main(string[] args)
         {
+            List<Verificare> elemente = new List<Verificare>();
             //b
-            List<Student> students = new List<Student>();
-            string[] linii = File.ReadAllLines(@"D:\10213bashar\ idStudent.txt");
-            for(int i = 0; i < linii.Length; i++)
+            Console.WriteLine("Introduceti numarul de elemente :");
+            var numarulDeElemente = int.Parse(Console.ReadLine());
+
+            for(int i = 0; i < numarulDeElemente; i++)
             {
-                students.Add(new Student { Id = i, Prenume = linii[i] });
-            }
+                Verificare verifica = new Verificare();
 
-            foreach(Student student in students)
+                Console.WriteLine("Introduceti Nume :");
+                verifica.Nume = Console.ReadLine();
+
+                Console.WriteLine("Introduceti prenumele :");
+                verifica.Prenume = Console.ReadLine();
+
+                Console.WriteLine("Introduceti nota  :");
+                string nota = Console.ReadLine();
+
+                if (!int.TryParse(nota, out int notaInt))
+                {
+                    Console.WriteLine("Nota introdusa nu este un numar. Introduceti din nou.");
+                    i--;
+                    continue;
+                }
+                verifica.Nota = notaInt;
+
+                elemente.Add(verifica);
+            }
+            foreach(var verifica in elemente)
             {
-                Console.WriteLine("Id: " + student.Id + "Prenume :" + student.Prenume);
+                Console.WriteLine("Nume: " + verifica.Nume + "Prenume :" + verifica.Prenume + "Nota :" + verifica.Nota);
             }
-            Console.ReadKey();
-
-            //c
-            Console.WriteLine("Introduceti preNumele studentului nou : ");
-            string PrenumeNou = Console.ReadLine();
-            File.AppendAllText("prenume.txt", PrenumeNou + Environment.NewLine);
-
             //d
-            Console.WriteLine("Introduceti id-ul studentului : ");
-            int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Introduceti numele studentului : ");
-            string newPrenume = Console.ReadLine();
-
-            string[] valoareaPren = File.ReadAllLines(@"\D:\10213bashar\ idStudent.txt");
-
-            valoareaPren[id] = newPrenume;
-
-            File.WriteAllLines("prenume.txt", valoareaPren);
-
-
+            var studentiCuNoteBune = elemente.Count(c => c.Nota >= 7 && c.Nota <= 9);
+            Console.WriteLine("Numarul de studenti cu nota cuprinse intre 7 si 9 :" + studentiCuNoteBune);
         }
+
+
+        
+        
     }
 }

@@ -1,0 +1,52 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace aplicatia2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> s1 = new List<string>();
+            s1.Add("Mahesh Calabesh");
+            s1.Add("chestie");
+            s1.Add("colectie");
+            s1.Add("apa");
+            s1.Add("Andreea Balan");
+            s1.Add("ploaie");
+            Console.WriteLine("el:" + String.Join(", ", s1.OrderBy(c => c)));
+            Console.WriteLine("el:" + String.Join(", ", s1.Where(c => c.Length > 4).ToList()));
+            Console.WriteLine("el:" + String.Join(", ", s1.Where(c => c.StartsWith("A")).ToList()));
+
+
+            if (s1.Count >= 5)
+            {
+
+
+
+                s1.RemoveAt(1);
+                foreach (string lista in s1)
+                    Console.WriteLine(lista);
+
+
+
+            }
+            else
+            {
+                Console.WriteLine("Lista nu are mai mult de 5 elemente!");
+            }
+
+            List<string> s2 = s1.Take(4).Where(c => c.Contains(" ")).ToList();
+            Console.WriteLine("Elementele sunt:" + String.Join(", ", s2.Count));
+
+            Console.WriteLine("Elementul de pe penultima pozitie este:" + String.Join(", ", s1.ElementAt(3)));
+
+
+        }
+
+        }
+          
+        
+    }

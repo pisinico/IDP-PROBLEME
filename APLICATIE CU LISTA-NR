@@ -1,0 +1,59 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace Ex_apl.examen_model_2__1_
+{
+    internal class Program
+    {
+
+        /*Se considera o listã cu elemente de tip intreg.Se cere sã se implementeze in C# o aplicatie de tip
+        consola care va indeplini urmatoarele cerinte:
+        a.Sa se afiseze elementele sortate descrescator;
+        b.Sa se afiseze frecventa de aparitie a valorii 1;
+        c.Sa se afiseze lista cu elemente care au valobrea mai mare ca 4;
+        d.Sa se afiseze suma elementelor care sunt formate dintr-o singurã cifrã;
+        e.Sa se afiseze câte elemente sunt pare dacã se omit primele 4 elemente din listä;
+        f.Sa se afiseze elementul aflat pe pozitia din mijlocul listei, daca lista are un numar par de
+        elemente.In cazul in care lista are un numar par de elemente, se va afisa mesajul "Numar par de
+        elemente"*/
+        static void Main(string[] args)
+        {
+            List<int> elemente = new List<int>() { 1, 6, 9, 14, 76, 5, 3, 1, 1,3 };
+
+            //a
+            Console.WriteLine("Elementele sortate descrescator :" + String.Join(", ", elemente.OrderByDescending(c => c)));
+
+            //b
+            Console.WriteLine("frecventa de aparitia a valorii 1 :" + elemente.Count(c => c == 1));
+
+            //c
+            List<int> maiMareCa4 = elemente.Where(c => c > 4).ToList();
+            Console.WriteLine("Elementele cu valoare mai mare ca 4 :" +String.Join(", ", maiMareCa4));
+
+            //d
+            Console.WriteLine("Suma elementele formate dintr-o singura cifra :" + elemente.Where(c => c >= 0 && c <= 9).Sum());
+
+            //e
+            List<int> elementePare = elemente.Skip(3).Where(c => c % 2 == 0).ToList();
+            Console.WriteLine("Elementele pare dupa emiterea primele 3 :" + String.Join(", " , elementePare.Count()));
+
+            //f
+            if (elemente.Count % 2 == 0)
+            {
+                int elementMijloc = elemente.ElementAt(elemente.Count / 2);
+                Console.WriteLine("Middle element: " + elementMijloc);
+            }
+            else
+            {
+                Console.WriteLine("Numar impar de elemente");
+            }
+
+            Console.WriteLine("Lista cu elemente este: "+String.Join("\n", elemente));
+        }
+    }
+}

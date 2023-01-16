@@ -1,0 +1,83 @@
+PROGRAM.CS 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace App_lab_2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            /*
+             2. Sa se creeze un proiect de tip consola in cadrul caruia se va aduga o clasa numit "Joc". Se cere sa se creeze o lista cu minim 5 elemente de tip Joc in Conditiile in care clasa este caracterizata de username (string) si score (int). Afisati elementele din lista.
+            b) Afisati primii 3 jucatori cu cel mai mare scor;
+            c) Afisati jucatorii sortati descrescator dupa scor;
+            d) Afisati jucatorii ai caror username incepe cu litera "B" tinand cont ca un username poate incepe atat cu litera mare cat si cu litera mica;
+            e) Numarati jucatorii ai caror username contine unul dintre caracterele "@", "_", "!" sau "#"; 
+             
+             */
+
+
+
+
+
+            Game[] g_arr = Game.PreiaJocuri();
+            //a
+            Game.AfiseazaJoc(g_arr.ToList());
+            //b
+            Console.WriteLine("\nPrimii 3 jucatori cu scorul cel mai mare sunt: ");
+            List<Game> bgame = g_arr.OrderByDescending(c => c.score).Take(3).ToList();
+            Game.AfiseazaJoc(bgame);
+            //c
+            Console.WriteLine("\nJucatorii ordonati descrescator sunt: ");
+            Game.AfiseazaJoc(g_arr.OrderByDescending(c => c.score).ToList());
+            //d
+            Console.WriteLine("\nJucatorii ai caror nume incepe cu litera B sunt: ");
+            Game.AfiseazaJoc(g_arr.Where(c => c.username.ToLower().StartsWith("b")).ToList());
+            //e
+            //Game.AfiseazaJoc(g_arr.Where(c => c.username.Contains("@") || c.username.Contains("_") || c.username.Contains("!") || c.username.Contains("#")).Count());
+            List<Game> egame = g_arr.Where(c => c.username.Contains("@") || c.username.Contains("_") || c.username.Contains("!") || c.username.Contains("#")).ToList();
+            Console.WriteLine("\nNumarul de username-uri care contin simboluri sunt: " + egame.Count());
+        }
+    }
+}
+_______________________________________________
+GAME.CS
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace App_lab_2
+{
+    public class Game
+    {
+        public int score { get; set; }
+        public string username { get; set; }
+
+        public static Game[] PreiaJocuri()
+        {
+            Game[] g_arr =
+            {
+            new Game() { username = "mothwellm@de", score = 353},
+            new Game() { username = "iguanaventure#", score = 34243 },
+            new Game() { username = "b@llwooded!", score = 452 },
+            new Game() { username = "boyscoutsfit", score = 53563 },
+            new Game() { username = "steadkarate", score = 4234 },
+            };
+        return g_arr;
+        }
+
+        public static void AfiseazaJoc(List<Game>jocuri)
+        {
+            foreach(Game g in jocuri)
+                Console.WriteLine("Jucatorul " + g.username + " care detine scorul: " + g.score);
+        }
+    }
+}

@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace vector
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+            int[] x = new int[5];
+            for (int i=0;i<5;i++)
+            {
+                Console.WriteLine("x[" + i + "]=");
+                x[i] = int.Parse(Console.ReadLine());
+         
+                
+            }
+
+            
+                Console.WriteLine("Vectorul este:" + String.Join(", ", x));
+            
+
+            //Problema 1
+            
+            bool rezultat = x.All(c => (c % 2 == 0));
+            Console.WriteLine(rezultat);
+            
+
+            //Problema 2
+            
+            bool rezultat = x.Any(c => (c % 2 == 0));
+            Console.WriteLine(rezultat);
+            
+
+            //Problema 3
+            
+            double avg = x.Average();
+            Console.WriteLine(avg);
+            
+
+            //Problema 4
+            
+            bool contine_valoare = x.Contains(7);
+            Console.WriteLine(contine_valoare);
+            
+
+
+            //Problema 5
+            
+            int nr_elem_pare = x.Count(c => (c % 2 == 0));
+            Console.WriteLine(nr_elem_pare);
+            
+            
+            //Problema 6
+
+            Console.WriteLine("Elementul de pe pozitia 2 este: " + x.ElementAt(2));
+
+            //Problema 7
+
+            Console.WriteLine("Valoarea maxima este: " + x.Max());
+            Console.WriteLine("Valoarea minima este: " + x.Min());
+
+            //Problema 8
+
+            Console.WriteLine("Vectorul inversat este: " + string.Join(" ", x.Reverse()));
+
+            //Problema 9
+
+            Console.WriteLine("Valoarea maxima este: " + x.Skip(3).Max());
+
+            //Problema 10 
+
+            Console.WriteLine("Elementele mai mari decat 5 din vector sunt: " + string.Join(" ", x.Where(c => (c > 5))));
+
+            //Problema 11
+
+             Console.WriteLine("Elemente cu index mai mare decat 2 din vector sunt: " + string.Join(" ", x.Where((c, i) => (i> 2))));
+            
+
+
+    }
+  
+    }
+}

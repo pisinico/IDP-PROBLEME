@@ -5,6 +5,15 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Collections.Generic;
 
+/*Subiect 2 – 3p (0.5p fiecare cerință. Nu se acordă punctaj parțial!) => 10 minute
+Să se implementeze o aplicație de tip consolă în C#, care va îndeplini următoarele cerințe:
+a. Să se citească dintr-un fișier toate liniile text, iar fiecare linie va reprezenta un element
+dintr-o listă;
+b. Să se numere câte elemente din listă încep cu litera ‘A’ sau ‘a’;
+c. Să se filtreze elementele a căror lungime (număr de caractere) depăsește valoarea 4;
+d. Să se sorteze descrescător elementele care conțin un spațiu alb din listă;
+e. Să se excludă primele 2 elemente din listă la afișare;
+f. Să se preia ultimele 2 elemente din listă și să se afișeze elementele rămase.*/
 
 namespace Aplicatia1
 {

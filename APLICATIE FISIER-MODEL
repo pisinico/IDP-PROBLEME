@@ -1,0 +1,29 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Data;
+using System.Collections.Generic;
+
+
+namespace Aplicatia1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List <string> fisier = File.ReadAllLines(@"C:\Users\user\Desktop\f2.txt").ToList();
+            Console.WriteLine(String.Join(", ", fisier));
+            fisier = fisier.Where(c => c.ToLower().StartsWith("a")).ToList();
+            Console.WriteLine("Numarul elementelor care incep cu a sau A:" + String.Join(", ",fisier.Count));
+            List<string> fisier2 = File.ReadAllLines(@"C:\Users\user\Desktop\f2.txt").Where(c => c.Length > 5).ToList();
+            Console.WriteLine("Elemente care au valoarea peste 4: " + String.Join(", ", fisier2));
+            List<string> fisier3 = File.ReadAllLines(@"C:\Users\user\Desktop\f2.txt").OrderByDescending(c => c).Where(c => c.Contains(" ")).ToList();
+            Console.WriteLine("Elementele descrescatoare: " + String.Join(", ", fisier3));
+            List<string> fisier4 = File.ReadAllLines(@"C:\Users\user\Desktop\f2.txt").Skip(2).ToList();
+            Console.WriteLine("Elementele sunt: " + String.Join(", ", fisier4));
+            List<string> fisier5 = File.ReadAllLines(@"C:\Users\user\Desktop\f2.txt").OrderByDescending(c => c).Take(2).ToList();
+            Console.WriteLine("Elementele sunt: " + String.Join(", ", fisier5));
+        }
+    }
+}
